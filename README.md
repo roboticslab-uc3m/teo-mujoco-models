@@ -26,5 +26,4 @@ cd /home/YOUR_USER/.mujoco/mujoco210/bin
 ```
 
 You should see something like this:
-file:///home/armega/Pictures/Screenshots/Screenshot%20from%202024-04-04%2009-29-29.png
--28:-47:84:48
+![Screenshot from 2024-04-04 09-29-29](https://github.com/roboticslab-uc3m/teo-mujoco-models/assets/38068010/bf833a6f-d498-4b29-b0aa-5901ce868e5b)
