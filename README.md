@@ -26,3 +26,5 @@ cd /home/YOUR_USER/.mujoco/mujoco210/bin
 ```
 
 You should see something like this:
+file:///home/armega/Pictures/Screenshots/Screenshot%20from%202024-04-04%2009-29-29.png
+-28:-47:84:48
