@@ -27,3 +27,15 @@ cd /home/YOUR_USER/.mujoco/mujoco210/bin
 
 You should see something like this:
 ![Screenshot from 2024-04-04 09-29-29](https://github.com/roboticslab-uc3m/teo-mujoco-models/assets/38068010/bf833a6f-d498-4b29-b0aa-5901ce868e5b)
+
+## Here what I am learning
+
+### Running MuJoCo in model visualizer
+```bash
+cd ~/.mujoco/mujoco210/bin
+./simulate
+```
+
+### Trying to make the TEO model work in MuJoCo
+
+I added the `teo_model` folder, this folder belongs to `teo-gazebo-models`.

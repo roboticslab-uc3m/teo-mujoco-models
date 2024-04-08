@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<mujoco model="TEO_head">
+
+    <!-- Define los activos -->
+    <asset>
+        <!-- Representación visual del Axial Neck -->
+        <mesh name="AxialNeck_visual" file="meshes/visual/AxialNeck.stl"/>
+        <!-- Colisión del Axial Neck -->
+        <mesh name="AxialNeck_collision" file="meshes/collision/AxialNeck.stl"/>
+
+        <!-- Representación visual del Frontal Neck -->
+        <mesh name="FrontalNeck_visual" file="meshes/visual/FrontalNeck.stl"/>
+        <!-- Colisión del Frontal Neck -->
+        <mesh name="FrontalNeck_collision" file="meshes/collision/FrontalNeck.stl"/>
+    </asset>
+
+    <!-- Define el cuerpo -->
+    <worldbody>
+        <body name="TEO_head">
+            <body name="AxialNeck_link" pos="0 0 0">
+
+                <!-- Define las propiedades del cuerpo -->
+                <inertial pos="0.000302 0.000193 -0.0452" mass="1" diaginertia="0.000939063 0.000939063 0.000528125"/>
+
+                <!-- Visualización del cuerpo -->
+                <geom name="AxialNeck_visual_geom" type="mesh" mesh="AxialNeck_visual" rgba="0.792157 0.819608 0.933333 1"/>
+
+                <!-- Colisión del cuerpo -->
+                <geom name="AxialNeck_collision_geom" type="mesh" mesh="AxialNeck_collision" conaffinity="1" condim="3" friction="0.7"/>
+                
+                <!-- Define la articulación -->
+                <joint name="AxialNeck" type="hinge" pos="0 0 0" axis="0 0 1" limited="true" range="-1.22 1.22" damping="0.001"/>
+            
+            </body>
+
+            <body name="FrontalNeck_link" pos="0 0 0">
+
+                <!-- Define las propiedades del cuerpo -->
+                <inertial pos="-0.002729 -0.000086 0.067027" mass="2" diaginertia="0.007599322 0.008325273 0.011403464"/>
+                
+                <!-- Visualización del cuerpo -->
+                <geom name="FrontalNeck_visual_geom" type="mesh" mesh="FrontalNeck_visual" rgba="1 1 0.933333 1"/>
+
+                <!-- Colisión del cuerpo -->
+                <geom name="FrontalNeck_collision_geom" type="mesh" mesh="FrontalNeck_collision" conaffinity="1" condim="3" friction="0.7"/>
+
+                <!-- Define la articulación -->
+                <joint name="FrontalNeck" type="hinge" pos="0 0 0" axis="0 1 0" limited="true" range="-0.51 0.51" damping="0.001"/>
+
+            </body>
+        </body>
+    
+    </worldbody>
+
+    <!-- Define el actuador -->
+    <actuator>
+        <motor joint="FrontalNeck"/>
+    </actuator>
+
+</mujoco>
