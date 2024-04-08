@@ -4,14 +4,14 @@
     <!-- Define los activos -->
     <asset>
         <!-- Representación visual del Axial Neck -->
-        <mesh name="AxialNeck_visual" file="../meshes/visual/AxialNeck.stl"/>
+        <mesh name="AxialNeck_visual" file="../meshes/visual/AxialNeckVisual.stl"/>
         <!-- Colisión del Axial Neck -->
-        <mesh name="AxialNeck_collision" file="../meshes/collision/AxialNeck.stl"/>
+        <mesh name="AxialNeck_collision" file="../meshes/collision/AxialNeckCollision.stl"/>
 
         <!-- Representación visual del Frontal Neck -->
-        <mesh name="FrontalNeck_visual" file="../meshes/visual/FrontalNeck.stl"/>
+        <mesh name="FrontalNeck_visual" file="../meshes/visual/FrontalNeckVisual.stl"/>
         <!-- Colisión del Frontal Neck -->
-        <mesh name="FrontalNeck_collision" file="../meshes/collision/FrontalNeck.stl"/>
+        <mesh name="FrontalNeck_collision" file="../meshes/collision/FrontalNeckCollisionCollision.stl"/>
     </asset>
 
     <!-- Define el cuerpo -->

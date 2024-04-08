@@ -1,0 +1,170 @@
+<?xml version="1.0"?>
+<mujoco model="TEO_leftArm">
+
+    <asset>
+        <!-- Representación visual del Axial Left Shoulder -->
+        <mesh name="AxialLeftShoulder_visual" file="../meshes/visual/AxialLeftShoulderVisual.stl"/>
+        <!-- Colisión del Axial Left Shoulder -->
+        <mesh name="AxialLeftShoulder_collision" file="../meshes/collision/AxialLeftShoulderCollision.stl"/>
+
+        <!-- Representación visual del Axial Left Wrist -->
+        <mesh name="AxialLeftWrist_visual" file="../meshes/visual/AxialLeftWristVisual.stl"/>
+        <!-- Colisión del Axial Left Wrist -->
+        <mesh name="AxialLeftWrist_collision" file="../meshes/collision/AxialLeftWristCollision.stl"/>
+
+        <!-- Representación visual del Frontal Left Elbow -->
+        <mesh name="FrontalLeftElbow_visual" file="../meshes/visual/FrontalLeftElbowVisual.stl"/>
+        <!-- Colisión del Frontal Left Elbow -->
+        <mesh name="FrontalLeftElbow_collision" file="../meshes/collision/FrontalLeftElbowCollision.stl"/>
+
+        <!-- Representación visual del Frontal Left Shoulder -->
+        <mesh name="FrontalLeftShoulder_visual" file="../meshes/visual/FrontalLeftShoulderVisual.stl"/>
+        <!-- Colisión del Frontal Frontal Left Shoulder -->
+        <mesh name="FrontalLeftShoulder_collision" file="../meshes/collision/FrontalLeftShoulderCollision.stl"/>
+
+        <!-- Representación visual del Frontal Left Wrist -->
+        <mesh name="FrontalLeftWrist_visual" file="../meshes/visual/FrontalLeftWristVisual.stl"/>
+        <!-- Colisión del Frontal Frontal Left Wrist -->
+        <mesh name="FrontalLeftWrist_collision" file="../meshes/collision/FrontalLeftWristCollision.stl"/>
+
+        <!-- Representación visual del Sagittal Left Shoulder -->
+        <mesh name="SagittalLeftShoulder_visual" file="../meshes/visual/SagittalLeftShoulderVisual.stl"/>
+        <!-- Colisión del Frontal Sagittal Left Shoulder -->
+        <mesh name="SagittalLeftShoulder_collision" file="../meshes/collision/SagittalLeftShoulderCollision.stl"/>
+
+    </asset>
+
+    <worldbody>
+        <body name="TEO_leftArm">
+
+            <body name="FrontalLeftShoulder_link" pos="0 0 0">
+
+                <!-- Define las propiedades del cuerpo -->
+                <inertial pos="-0.002272 0.056186 0.008165" mass="2" diaginertia="0.004226791 0.00212734 0.00409322"/>
+
+                <!-- Visualización del cuerpo -->
+                <geom name="FrontalLeftShoulder_visual_geom" type="mesh" mesh="FrontalLeftShoulder_visual" rgba="0.792157 0.819608 0.933333 1"/>
+
+                <!-- Colisión del cuerpo -->
+                <geom name="FrontalLeftShoulder_collision_geom" type="mesh" mesh="FrontalLeftShoulder_collision" conaffinity="1" condim="3" friction="0.7"/>
+
+                <!-- Define la articulación -->
+                <joint name="FrontalLeftShoulder" type="hinge" pos="0 0 0" axis="0 1 0" limited="true" range="-1.69 1.98" damping="0.001"/>
+
+            </body>
+
+            <body name="SagittalLeftShoulder_link" pos="0 0.084 0">
+
+                <!-- Define las propiedades del cuerpo -->
+                <inertial pos="-0.008047 0.004937 -0.027619" mass="1" diaginertia="0.001610921 0.002187768 0.001173531"/>
+
+                <!-- Visualización del cuerpo -->
+                <geom name="SagittalLeftShoulder_visual_geom" type="mesh" mesh="SagittalLeftShoulder_visual" rgba="0.792157 0.819608 0.933333 1"/>
+
+                <!-- Colisión del cuerpo -->
+                <geom name="SagittalLeftShoulder_collision_geom" type="mesh" mesh="SagittalLeftShoulder_collision" conaffinity="1" condim="3" friction="0.7"/>
+
+                <!-- Define la articulación -->
+                <joint name="SagittalLeftShoulder" type="hinge" pos="0 0 0" axis="1 0 0" limited="true" range="-0.42 1.34" damping="0.001"/>
+
+            </body>
+
+            <body name="AxialLeftShoulder_link" pos="0 0.084 -0.329">
+
+                <!-- Define las propiedades del cuerpo -->
+                <!-- 
+                <inertial pos="-0.000172 0.000249 0.100649" mass="1" diaginertia="0.006925108 0.006741634 0.000611796"/>
+                -->
+                <inertial pos="-0.000172 0.000249 0.100649" mass="1"/>
+
+                <!-- Visualización del cuerpo -->
+                <geom name="AxialLeftShoulder_visual_geom" type="mesh" mesh="SagittalLeftShoulder_visual" rgba="0.792157 0.819608 0.933333 1"/>
+
+                <!-- Colisión del cuerpo -->
+                <geom name="AxialLeftShoulder_collision_geom" type="mesh" mesh="SagittalLeftShoulder_collision" conaffinity="1" condim="3" friction="0.7"/>
+
+                <!-- Define la articulación -->
+                <joint name="AxialLeftShoulder" type="hinge" pos="0 0 0" axis="0 0 1" limited="true" range="-0.9 1.47" damping="0.001"/>
+
+            </body>
+
+            <body name="FrontalLeftElbow_link" pos="0 0.084 -0.329">
+
+                <!-- Define las propiedades del cuerpo -->
+                <inertial pos="0.000287 -0.000116 -0.053185" mass="1" diaginertia="0.002590029 0.00262307 0.000446024"/>
+
+                <!-- Visualización del cuerpo -->
+                <geom name="FrontalLeftElbow_visual_geom" type="mesh" mesh="SagittalLeftShoulder_visual" rgba="0.792157 0.819608 0.933333 1"/>
+
+                <!-- Colisión del cuerpo -->
+                <geom name="FrontalLeftElbow_collision_geom" type="mesh" mesh="SagittalLeftShoulder_collision" conaffinity="1" condim="3" friction="0.7"/>
+
+                <!-- Define la articulación -->
+                <joint name="FrontalLeftElbow" type="hinge" pos="0 0 0" axis="0 1 0" limited="true" range="-1.76 1.69" damping="0.001"/>
+
+            </body>
+
+            <body name="AxialLeftWrist_link" pos="0 0.084 -0.531">
+
+                <!-- Define las propiedades del cuerpo -->
+                <!-- 
+                <inertial pos="-0.001151 0.000603 0.02464" mass="0.63149" diaginertia="0.000701463 0.000612806 0.000326949"/>
+                -->
+                <inertial pos="-0.001151 0.000603 0.02464" mass="0.63149"/>
+
+                <!-- Visualización del cuerpo -->
+                <geom name="AxialLeftWrist_visual_geom" type="mesh" mesh="SagittalLeftShoulder_visual" rgba="0.792157 0.819608 0.933333 1"/>
+
+                <!-- Colisión del cuerpo -->
+                <geom name="AxialLeftWrist_collision_geom" type="mesh" mesh="SagittalLeftShoulder_collision" conaffinity="1" condim="3" friction="0.7"/>
+
+                <!-- Define la articulación -->
+                <joint name="AxialLeftWrist" type="hinge" pos="0 0 0" axis="0 0 1" limited="true" range="-1.77 1.33" damping="0.001"/>
+
+            </body>
+
+            <body name="FrontalLeftWrist_link" pos="0 0.084 -0.531">
+
+                <!-- Define las propiedades del cuerpo -->
+                <inertial pos="-0.002314 0.00007 -0.108635" mass="0.72" diaginertia="0.005330647 0.005345282 0.000882489"/>
+
+                <!-- Visualización del cuerpo -->
+                <geom name="FrontalLeftWrist_visual_geom" type="mesh" mesh="SagittalLeftShoulder_visual" rgba="0.792157 0.819608 0.933333 1"/>
+
+                <!-- Colisión del cuerpo -->
+                <geom name="FrontalLeftWrist_collision_geom" type="mesh" mesh="SagittalLeftShoulder_collision" conaffinity="1" condim="3" friction="0.7"/>
+
+                <!-- Define la articulación -->
+                <joint name="FrontalLeftWrist" type="hinge" pos="0 0 0" axis="0 1 0" limited="true" range="-1.98 1.07" damping="0.001"/>
+
+            </body>
+
+        </body>
+    </worldbody>
+
+        <!-- Define los actuadores -->
+        <actuator>
+            <motor joint="FrontalLeftShoulder"/>
+        </actuator>
+
+        <actuator>
+            <motor joint="SagittalLeftShoulder"/>
+        </actuator>
+
+        <actuator>
+            <motor joint="AxialLeftShoulder"/>
+        </actuator>
+
+        <actuator>
+            <motor joint="FrontalLeftElbow"/>
+        </actuator>
+
+        <actuator>
+            <motor joint="AxialLeftWrist"/>
+        </actuator>
+
+        <actuator>
+            <motor joint="FrontalLeftWrist"/>
+        </actuator>
+
+</mujoco>
