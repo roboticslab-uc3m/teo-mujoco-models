@@ -1,20 +1,22 @@
 <mujoco model="TEO_humanoid">
 
+    <!-- Compiler settings -->
     <compiler inertiafromgeom="true" angle="degree"/>
-        
+
+    <!-- Default settings for joints, geoms, and motors -->
     <default>
         <joint limited="true" damping="1" armature="0"/>
         <geom condim="1" material="matgeom"/>
         <motor ctrlrange="-.4 .4" ctrllimited="true"/>
     </default>
+    
+    <!-- Simulation settings -->
+    <option timestep="0.005" iterations="50" tolerance="1e-10" solver="Newton" jacobian="dense" cone="pyramidal"/>
 
-    <!--    
-        <option timestep="0.005" iterations="50" tolerance="1e-10" solver="Newton" jacobian="dense" cone="pyramidal"/>
-    -->
-    <option gravity="0 0 -9.81" timestep="0.002" />
-    
+    <!-- Size settings -->
     <size nconmax="50" njmax="200" nstack="10000"/>
-    
+
+    <!-- Visual settings -->
     <visual>
         <map force="0.1" zfar="30"/>
         <rgba haze="0.15 0.25 0.35 1"/>
@@ -22,65 +24,92 @@
         <global offwidth="800" offheight="800"/>
     </visual>
     
+    <!-- Asset definitions -->
     <asset>
+        <!-- Skybox texture -->
         <texture type="skybox" builtin="gradient" rgb1="0.3 0.5 0.7" rgb2="0 0 0" width="512" height="512"/>
         
+        <!-- Plane texture -->
         <texture name="texplane" type="2d" builtin="checker" rgb1=".2 .3 .4" rgb2=".1 0.15 0.2" width="512" height="512" mark="cross" markrgb=".8 .8 .8"/>
         
+        <!-- Geom texture -->
         <texture name="texgeom" type="cube" builtin="flat" mark="cross" width="127" height="1278"
         rgb1="0.8 0.6 0.4" rgb2="0.8 0.6 0.4" markrgb="1 1 1" random="0.01"/>
         
+        <!-- Material definitions -->
         <material name="matplane" reflectance="0.3" texture="texplane" texrepeat="1 1" texuniform="true"/>
-        
         <material name="matgeom" texture="texgeom" texuniform="true" rgba="0.8 0.6 .4 1"/>
     </asset>
     
-    
+    <!-- Worldbody definitions -->
     <worldbody>
+        <!-- Ground plane -->
         <geom name="floor" pos="0 0 0" size="0 0 .25" type="plane" material="matplane" condim="3"/>
         
+        <!-- Lights -->
         <light directional="false" diffuse=".2 .2 .2" specular="0 0 0" pos="0 0 5" dir="0 0 -1" castshadow="false"/>
         <light mode="targetbodycom" target="AxialTrunk" directional="false" diffuse=".8 .8 .8" specular="0.3 0.3 0.3" pos="0 0 4.0" dir="0 0 -1"/>
         
+        <!-- Body hierarchy -->
+        <!-- AxialTrunk -->
         <body name="AxialTrunk" pos="0 0 1.35">
+            <!-- AxialTrunk geometry and joint -->
             <geom name="AxialTrunk_geom" type="box" pos="0 0 0" size="0.1 0.1 0.1"/>
             <joint name="AxialTrunk_joint" type="free" pos="0 0 0" axis="0 0 1" range="-59.3 46.3"/>
             
+            <!-- FrontalTrunk -->
             <body name="FrontalTrunk" pos="0 0 0.5">
+                <!-- FrontalTrunk geometry and joint -->
                 <geom name="FrontalTrunk_geom" type="box" pos="0 0 0" size="0.1 0.4 0.3"/>
                 <joint name="FrontalTrunk_joint" type="hinge" pos="0 0 0" axis="0 1 0" range="-90.4 10.1"/>
 
+                <!-- AxialNeck -->
                 <body name="AxialNeck" pos="0 0 0.5">
+                    <!-- AxialNeck geometry and joint -->
                     <geom name="AxialNeck_geom" type="box" pos="0 0 0" size="0.1 0.1 0.1"/>
                     <joint name="AxialNeck_joint" type="hinge" pos="0 0 0" axis="0 0 1" range="-60 60"/>
 
+                    <!-- FrontalNeck -->
                     <body name="FrontalNeck" pos="0 0 0.3">
+                        <!-- FrontalNeck geometry and joint -->
                         <geom name="FrontalNeck_geom" type="box" pos="0 0 0" size="0.2 0.2 0.1"/>
                         <joint name="FrontalNeck_joint" type="hinge" pos="0 0 0" axis="0 1 0" range="-60 60"/>
                     </body>
                 </body>
 
+                <!-- FrontalRightShoulder -->
                 <body name="FrontalRightShoulder" pos="0 -0.6 0.2">
+                    <!-- FrontalRightShoulder geometry and joint -->
                     <geom name="FrontalRightShoulder_geom" type="box" pos="0 0 0" size="0.1 0.1 0.1"/>
                     <joint name="FrontalRightShoulder_joint" type="hinge" pos="0 0 0" axis="0 1 0" range="-98.1 106"/>
 
+                    <!-- SagittalRightShoulder -->
                     <body name="SagittalRightShoulder" pos="0 0 -0.25">
+                        <!-- SagittalRightShoulder geometry and joint -->
                         <geom name="SagittalRightShoulder" type="box" pos="0 0 0" size="0.1 0.1 0.1"/>
                         <joint name="SagittalRightShoulder_joint" type="hinge" pos="0 0 0" axis="1 0 0" range="-75.5 22.4"/>
                     
+                        <!-- AxialRightShoulder -->
                         <body name="AxialRightShoulder" pos="0 0 -0.25">
+                            <!-- AxialRightShoulder geometry and joint -->
                             <geom name="AxialRightShoulder_geom" type="box" pos="0 0 0" size="0.1 0.1 0.1"/>
                             <joint name="AxialRightShoulder_joint" type="hinge" pos="0 0 0" axis="0 0 1" range="-80.1 57"/>
                             
+                            <!-- FrontalRightElbow -->
                             <body name="FrontalRightElbow" pos="0 0 -0.25">
+                                <!-- FrontalRightElbow geometry and joint -->
                                 <geom name="FrontalRightElbow_geom" type="box" pos="0 0 0" size="0.1 0.1 0.1"/>
                                 <joint name="FrontalRightElbow_joint" type="hinge" pos="0 0 0" axis="0 1 0" range="-99.6 98.4"/>
 
+                                <!-- AxialRightWrist -->
                                 <body name="AxialRightWrist" pos="0 0 -0.25">
+                                    <!-- AxialRightWrist geometry and joint -->
                                     <geom name="AxialRightWrist_geom" type="box" pos="0 0 0" size="0.1 0.1 0.1"/>
                                     <joint name="AxialRightWrist_joint" type="hinge" pos="0 0 0" axis="0 0 1" range="-80.4 99.6"/>
 
+                                    <!-- FrontalRightWrist -->
                                     <body name="FrontalRightWrist" pos="0 0 -0.25">
+                                        <!-- FrontalRightWrist geometry and joint -->
                                         <geom name="FrontalRightWrist_geom" type="box" pos="0 0 0" size="0.1 0.1 0.1"/>
                                         <joint name="FrontalRightWrist_joint" type="hinge" pos="0 0 0" axis="0 1 0" range="-115.1 44.7"/>
                                     </body>
@@ -90,27 +119,39 @@
                     </body>
                 </body>
 
+                <!-- FrontalLeftShoulder -->
                 <body name="FrontalLeftShoulder" pos="0 0.6 0.2">
+                    <!-- FrontalLeftShoulder geometry and joint -->
                     <geom name="FrontalLeftShoulder_geom" type="box" pos="0 0 0" size="0.1 0.1 0.1"/>
                     <joint name="FrontalLeftShoulder_joint" type="hinge" pos="0 0 0" axis="0 1 0" range="-96.8 113.2"/>
     
+                    <!-- SagittalLeftShoulder -->
                     <body name="SagittalLeftShoulder" pos="0 0 -0.25">
+                        <!-- SagittalLeftShoulder geometry and joint -->
                         <geom name="SagittalLeftShoulder" type="box" pos="0 0 0" size="0.1 0.1 0.1"/>
                         <joint name="SagittalLeftShoulder_joint" type="hinge" pos="0 0 0" axis="1 0 0" range="-23.9 76.5"/>
                         
+                        <!-- AxialLeftShoulder -->
                         <body name="AxialLeftShoulder" pos="0 0 -0.25">
+                            <!-- AxialLeftShoulder geometry and joint -->
                             <geom name="AxialLeftShoulder_geom" type="box" pos="0 0 0" size="0.1 0.1 0.1"/>
                             <joint name="AxialLeftShoulder_joint" type="hinge" pos="0 0 0" axis="0 0 1" range="-51.6 84.1"/>
                                 
+                            <!-- FrontalLeftElbow -->
                             <body name="FrontalLeftElbow" pos="0 0 -0.25">
+                                <!-- FrontalRightElbow geometry and joint -->
                                 <geom name="FrontalLeftElbow_geom" type="box" pos="0 0 0" size="0.1 0.1 0.1"/>
                                 <joint name="FrontalLeftElbow_joint" type="hinge" pos="0 0 0" axis="0 1 0" range="-101.1 96.8"/>
     
+                                <!-- AxialLeftWrist -->
                                 <body name="AxialLeftWrist" pos="0 0 -0.25">
+                                    <!-- AxialLeftWrist geometry and joint -->
                                     <geom name="AxialLeftWrist_geom" type="box" pos="0 0 0" size="0.1 0.1 0.1"/>
                                     <joint name="AxialLeftWrist_joint" type="hinge" pos="0 0 0" axis="0 0 1" range="-101.3 76.4"/>
     
+                                    <!-- FrontalLeftWrist -->
                                     <body name="FrontalLeftWrist" pos="0 0 -0.25">
+                                        <!-- FrontalLeftWrist geometry and joint -->
                                         <geom name="FrontalLeftWrist_geom" type="box" pos="0 0 0" size="0.1 0.1 0.1"/>
                                         <joint name="FrontalLeftWrist_joint" type="hinge" pos="0 0 0" axis="0 1 0" range="-113.3 61.3"/>
                                     </body>
@@ -121,27 +162,39 @@
                 </body>
             </body>
 
+            <!-- AxialRightHip -->
             <body name="AxialRightHip" pos="0 0.3 0">
+                <!-- AxialRightHip geomtry and joint -->
                 <geom name="AxialRightHip_geom" type="box" pos="0 0 0" size="0.1 0.1 0.1"/>
                 <joint name="AxialRightHip_joint" type="hinge" pos="0 0 0" axis="0 0 1" range="-32.8 27.9"/>
                 
+                <!-- SaggitalRightHip -->
                 <body name="SagittalRightHip" pos="0 0 -0.25">
+                    <!-- SaggitalRightHip geometry and joint -->
                     <geom name="SagittalRightHip" type="box" pos="0 0 0" size="0.1 0.1 0.1"/>
                     <joint name="SagittalRightHip_joint" type="hinge" pos="0 0 0" axis="1 0 0" range="-14.2 12.5"/>
                     
+                    <!-- FrontalRightHip -->
                     <body name="FrontalRightHip" pos="0 0 -0.25">
+                        <!-- FrontalRightHip geometry and joint -->
                         <geom name="FrontalRightHip_geom" type="box" pos="0 0 0" size="0.1 0.1 0.1"/>
                         <joint name="FrontalRightHip_joint" type="hinge" pos="0 0 0" axis="0 1 0" range="-31.6 42.3"/>
 
+                        <!-- FrontalRightKnee -->
                         <body name="FrontalRightKnee" pos="0 0 -0.25">
+                            <!-- FrontalRightKnee geometry and joint -->
                             <geom name="FrontalRightKnee_geom" type="box" pos="0 0 0" size="0.1 0.1 0.1"/>
                             <joint name="FrontalRightKnee_joint" type="hinge" pos="0 0 0" axis="0 1 0" range="-61.3 82.4"/>
 
+                            <!-- FrontalRightAnkle -->
                             <body name="FrontalRightAnkle" pos="0 0 -0.25">
+                                <!-- FrontalRightAnkle geometry and joint -->
                                 <geom name="FrontalRightAnkle_geom" type="box" pos="0 0 0" size="0.1 0.1 0.1"/>
                                 <joint name="FrontalRightAnkle_joint" type="hinge" pos="0 0 0" axis="0 1 0" range="-23.1 25.4"/>
                             
+                                <!-- SagittalRightAnkle -->
                                 <body name="SagittalRightAnkle" pos="0 0 -0.25">
+                                    <!-- SagittalRightAnkle geometry and joint -->
                                     <geom name="SagittalRightAnkle" type="box" pos="0 0 0" size="0.1 0.1 0.1"/>
                                     <joint name="SagittalRightAnkle_joint" type="hinge" pos="0 0 0" axis="1 0 0" range="-19.9 42.5"/>
                                 </body>
@@ -151,27 +204,39 @@
                 </body>
             </body>
 
+            <!-- AxialLeftHip -->
             <body name="AxialLeftHip" pos="0 -0.3 0">
+                <!-- AxialLeftHip geomtry and joint -->
                 <geom name="AxialLeftHip_geom" type="box" pos="0 0 0" size="0.1 0.1 0.1"/>
                 <joint name="AxialLeftHip_joint" type="hinge" pos="0 0 0" axis="0 0 1" range="-32.8 27.9"/>
                 
+                <!-- SaggitalLeftHip -->
                 <body name="SagittalLeftHip" pos="0 0 -0.25">
+                    <!-- SaggitalLeftHip geometry and joint -->
                     <geom name="SagittalLeftHip" type="box" pos="0 0 0" size="0.1 0.1 0.1"/>
                     <joint name="SagittalLeftHip_joint" type="hinge" pos="0 0 0" axis="1 0 0" range="-14.2 12.5"/>
                     
+                    <!-- FrontalLeftHip -->
                     <body name="FrontalLeftHip" pos="0 0 -0.25">
+                        <!-- FrontalLeftHip geometry and joint -->
                         <geom name="FrontalLeftHip_geom" type="box" pos="0 0 0" size="0.1 0.1 0.1"/>
                         <joint name="FrontalLeftHip_joint" type="hinge" pos="0 0 0" axis="0 1 0" range="-31.6 42.3"/>
 
+                        <!-- FrontalLeftKnee -->
                         <body name="FrontalLeftKnee" pos="0 0 -0.25">
+                            <!-- FrontalLeftKnee geometry and joint -->
                             <geom name="FrontalLeftKnee_geom" type="box" pos="0 0 0" size="0.1 0.1 0.1"/>
                             <joint name="FrontalLeftKnee_joint" type="hinge" pos="0 0 0" axis="0 1 0" range="-61.3 82.4"/>
 
+                            <!-- FrontalLeftAnkle -->
                             <body name="FrontalLeftAnkle" pos="0 0 -0.25">
+                                <!-- FrontalLeftAnkle geometry and joint -->
                                 <geom name="FrontalLeftAnkle_geom" type="box" pos="0 0 0" size="0.1 0.1 0.1"/>
                                 <joint name="FrontalLeftAnkle_joint" type="hinge" pos="0 0 0" axis="0 1 0" range="-23.1 25.4"/>
                             
+                                <!-- SagittalLeftAnkle -->
                                 <body name="SagittalLeftAnkle" pos="0 0 -0.25">
+                                    <!-- SagittalLeftAnkle geometry and joint -->
                                     <geom name="SagittalLeftAnkle" type="box" pos="0 0 0" size="0.1 0.1 0.1"/>
                                     <joint name="SagittalLeftAnkle_joint" type="hinge" pos="0 0 0" axis="1 0 0" range="-19.9 42.5"/>
                                 </body>
@@ -185,14 +250,18 @@
         
     </worldbody>
 
+    <!-- Actuator definitions -->
     <actuator>
 
+        <!-- Motors for controlling joints -->
         <motor name="AxialTrunk_motor" gear="200" joint="AxialTrunk_joint"/>
         <motor name="FrontalTrunk_motor" gear="200" joint="FrontalTrunk_joint"/>
-
+        
+        <!-- Neck -->
         <motor name="AxialNeck_motor" gear="200" joint="AxialNeck_joint"/>
         <motor name="FrontalNeck_motor" gear="200" joint="FrontalNeck_joint"/>
 
+        <!-- Right arm -->
         <motor name="FrontalRightShoulder_motor" gear="200" joint="FrontalRightShoulder_joint"/>
         <motor name="SagittalRightShoulder_motor" gear="200" joint="SagittalRightShoulder_joint"/>
         <motor name="AxialRightShoulder_motor" gear="200" joint="AxialRightShoulder_joint"/>
@@ -200,6 +269,7 @@
         <motor name="AxialRightWrist_motor" gear="200" joint="AxialRightWrist_joint"/>
         <motor name="FrontalRightWrist_motor" gear="200" joint="FrontalRightWrist_joint"/>
 
+        <!-- Left arm -->
         <motor name="FrontalLeftShoulder_motor" gear="200" joint="FrontalLeftShoulder_joint"/>
         <motor name="SagittalLeftShoulder_motor" gear="200" joint="SagittalLeftShoulder_joint"/>
         <motor name="AxialLeftShoulder_motor" gear="200" joint="AxialLeftShoulder_joint"/>
@@ -207,6 +277,7 @@
         <motor name="AxialLeftWrist_motor" gear="200" joint="AxialLeftWrist_joint"/>
         <motor name="FrontalLeftWrist_motor" gear="200" joint="FrontalLeftWrist_joint"/>
 
+        <!-- Right leg -->
         <motor name="AxialRightHip_motor" gear="200" joint="AxialRightHip_joint"/>
         <motor name="SagittalRightHip_motor" gear="200" joint="SagittalRightHip_joint"/>
         <motor name="FrontalRightHip_motor" gear="200" joint="FrontalRightHip_joint"/>
@@ -214,6 +285,7 @@
         <motor name="FrontalRightAnkle_motor" gear="200" joint="FrontalRightAnkle_joint"/>
         <motor name="SagittalRightAnkle_motor" gear="200" joint="SagittalRightAnkle_joint"/>
 
+        <!-- Left leg -->
         <motor name="AxialLeftHip_motor" gear="200" joint="AxialLeftHip_joint"/>
         <motor name="SagittalLeftHip_motor" gear="200" joint="SagittalLeftHip_joint"/>
         <motor name="FrontalLeftHip_motor" gear="200" joint="FrontalLeftHip_joint"/>
