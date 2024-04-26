@@ -2,7 +2,7 @@
 1. Install MuJoCo
 2. Make a TEO XML model for MuJoCo
 # Why are we developing this?
-![mujoco_logo](https://github.com/roboticslab-uc3m/teo-mujoco-models/assets/38068010/fc381a16-ac87-4010-ba8b-c63b40a376ef)
+![mujoco_logo](imgs/mujoco_logo.png)
 **MuJoCo** is a free and open source physics engine that aims to facilitate research and development in robotics and other areas where fast and accurate simulation is needed.
 
 This simulator has been getting popular during the last years because of it's use in the field of reinforcement learning.
@@ -30,10 +30,10 @@ cd ~/mujoco-<version>/bin
 ./simulate ../model/humanoid/humanoid.xml
 ```
 You should see something like this:
-![mujoco_installation](https://github.com/roboticslab-uc3m/teo-mujoco-models/assets/38068010/02828dbd-7b71-4539-a063-ef976dbe9149)
+![mujoco_installation](imgs/mujoco_installation.png)
 # Make TEO XML Model
 To make the model of TEO I've follow this diagram:
-![teo_diagram](https://github.com/roboticslab-uc3m/teo-mujoco-models/assets/38068010/476b9573-0bd7-44a6-bfcf-d5daba64477f)
+![teo_diagram](imgs/teo_diagram.png)
 In contrast to the Gazebo SDF format, MuJoCo employs the XML format. Unlike SDF files, XML files in MuJoCo do not utilize the "parent" and "child" tags to delineate the structure of TEO's entire body. Instead, it follows a tree-like structure, where the parent node is the AxialTrunk, which branches into three nodes: FrontalTrunk, AxialRightHip, and AxialLeftHip. The FrontalTrunk, in turn, branches into three nodes: AxialNeck, FrontalRightShoulder, and FrontalLeftShoulder.
 
 # Use TEO XML Model in MuJoCo
@@ -46,4 +46,4 @@ cd ~/mujoco-<version>/bin
 ./simulate ~/repos/teo-mujoco-models/models/teo_blocks.xml
 ```
 You should see something like this:
-![teo_blocks_mujoco](https://github.com/roboticslab-uc3m/teo-mujoco-models/assets/38068010/a3bfb850-7050-42f9-840d-e2f1ede3cbc3)
+![teo_blocks_mujoco](imgs/teo_blocks_mujoco.png)
